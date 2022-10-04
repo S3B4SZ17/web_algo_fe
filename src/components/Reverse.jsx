@@ -1,5 +1,8 @@
 import React from "react";
 import axios from "axios";
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import Card from 'react-bootstrap/Card';
 
 class Reverse extends React.Component {
   constructor(props) {
@@ -31,19 +34,30 @@ class Reverse extends React.Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Number:
-            <input type="number" name="number" onChange={this.handleChange} />
-          </label>
-          <button type="submit">Add</button>
-        </form>
-        <label>
-          Reverse:
-          <output type="number" name="reverse">
-            {this.state.reverse}
-          </output>
-        </label>
+        <Card style={{ width: '20rem', margin: '2rem'}}>
+          <Card.Body>
+          <Card.Title>Reverse Number</Card.Title>
+          <Card.Text>
+            Enter a number and it will return the reverse of it.
+          </Card.Text>
+          <Form onSubmit={this.handleSubmit}>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Label>
+                Number:
+                <Form.Control type="number" name="number" onChange={this.handleChange} />
+              </Form.Label>
+              <Button style={{ margin: '5px'}} type="submit" variant="primary">Add</Button>
+              <Form.Label>
+                Reverse:
+                <Form.Label type="number" name="reverse" style={{ margin: '15px'}}>{this.state.reverse}</Form.Label>
+              </Form.Label>
+            </Form.Group>
+
+          </Form>
+        </Card.Body>
+      
+        </Card>
+        
       </div>
     );
   }
