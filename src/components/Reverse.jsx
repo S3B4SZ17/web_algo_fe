@@ -49,7 +49,7 @@ class Reverse extends React.Component {
               <Button style={{ margin: '5px'}} type="submit" variant="primary">Add</Button>
               <Form.Label>
                 Reverse:
-                <Form.Label type="number" name="reverse" style={{ margin: '15px'}}>{this.state.reverse}</Form.Label>
+                <Form.Label type="number" name="reverse" style={{ padding: '15px'}}>{this.state.reverse}</Form.Label>
               </Form.Label>
             </Form.Group>
 

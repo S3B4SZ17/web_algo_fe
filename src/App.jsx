@@ -1,9 +1,9 @@
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import Reverse from "./components/Reverse";
+import Home from "./pages/Home";
 import "./App.css";
 
 function App() {
-  return <Reverse />;
+  return <Home />;
 }
 
 export default App;

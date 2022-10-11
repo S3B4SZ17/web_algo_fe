@@ -2,6 +2,20 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Run the app
+
+The easiest way to run the app is by creating a Docker image and running a container
+
+Build the image
+`docker build --no-cache -t web_algo_fe:1.0 .`
+
+Run the container
+`docker run --name web_algo_fe -p 3000:80 web_algo_fe:1.0`
+
+Then navigate to `localhost:3000` on your browser.
+
+If you do not have docker you need to install node and then install all the necessary dependencies, they are listed in the `Dockerfile` under the line that goes like `"# install node modules and build assets
+RUN npm config set legacy-p ... "`
 ## Available Scripts
 
 In the project directory, you can run:
@@ -68,3 +82,5 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
