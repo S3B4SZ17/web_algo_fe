@@ -20,23 +20,23 @@ function Login() {
         <a href="!#">Forgot password?</a>
       </div>
 
-      <MDBBtn href="http://localhost:9090/login-gl" rel="noreferrer" className="mb-4">Sign in</MDBBtn>
+      <MDBBtn href="http://localhost:9090/api/login-gl" rel="noreferrer" className="mb-4">Sign in</MDBBtn>
 
       <div className="text-center">
         <p>Not a member? <a href="#!">Register</a></p>
-        <p>or sign up with:</p>
+        <p>or login with:</p>
 
         <div className='d-flex justify-content-between mx-auto' style={{width: '40%'}}>
           <MDBBtn tag='a' color='none' className='m-1' style={{ color: '#1266f1' }}>
-            <MDBIcon fab icon='facebook-f' size="sm"/>
+            <MDBIcon fab icon='facebook-f' size="md"/>
           </MDBBtn>
 
           <MDBBtn tag='a' color='none' className='m-1' style={{ color: '#1266f1' }}>
             <MDBIcon fab icon='twitter' size="sm"/>
           </MDBBtn>
 
-          <MDBBtn tag='a' color='none' className='m-1' style={{ color: '#1266f1' }}>
-            <MDBIcon fab icon='google' size="sm"/>
+          <MDBBtn href="http://localhost:9090/api/login-gl" rel="noreferrer" tag='a' color='none' className='m-1' >
+            <MDBIcon fab icon='google' size="sm" color="success"/>
           </MDBBtn>
 
           <MDBBtn tag='a' color='none' className='m-1' style={{ color: '#1266f1' }}>
