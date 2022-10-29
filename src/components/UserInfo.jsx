@@ -3,20 +3,21 @@ import React, { useState, useEffect } from 'react';
 import Card from 'react-bootstrap/Card';
 import { useCookies } from 'react-cookie';
 import Alert from 'react-bootstrap/Alert';
+import Button from 'react-bootstrap/Button';
 
 
 function UserInfo (){
-    const [cookies] = useCookies(['gmail_token']);
+    const [cookies] = useCookies(['token']);
     const [email, setEmail] = useState('');
     const [authenticated, setAuthenticated] = useState(false);
-
+    const [show, setShow] = useState(true);
 
     useEffect( () => {
-      if (cookies.gmail_token == ''){
+      if (cookies.token == ''){
         setAuthenticated(false)
       }else{
         axios
-        .get("http://localhost:9090/api/authorized/userinfo", {headers: {'Authorization': `Bearer ${cookies.gmail_token}`}})
+        .get("http://localhost:8080/api/authorized/userinfo", {headers: {'Authorization': `Bearer ${cookies.token}`}})
         .then((res) => {
           setEmail(res.data.user.email);
           localStorage.setItem("isAuthenticated", "true");
@@ -31,15 +32,16 @@ function UserInfo (){
     return (
       <div>
           {authenticated
-            ? <Alert variant="success">Hurray! You're a genius.</Alert>
+            ? <Alert show={show} variant="success" onClose={() => setShow(false)} dismissible>Hurray! You're a genius.</Alert>
 
-            : <Alert variant="danger" onClose={() => setAuthenticated(false)} dismissible>
+            : <Alert show={show} variant="danger" onClose={() => setShow(false)} dismissible>
               <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
               <p>
                 You are not authenticated!
               </p>
               </Alert>
           }
+          {/* {(true|false) ? si true hago esto : si false hago esto} */}
           
           <Card style={{ width: '20rem', margin: '2rem'}}>
           <Card.Body>

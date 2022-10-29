@@ -1,26 +1,29 @@
 import React from 'react';
 import {
   MDBContainer,
-  MDBInput,
   MDBCheckbox,
   MDBBtn,
   MDBIcon
 }
 from 'mdb-react-ui-kit';
 
+import Button from '@mui/material/Button';
+import GoogleIcon from '@mui/icons-material/Google';
+
 function Login() {
   return (
     <MDBContainer className="p-3 my-5 d-flex flex-column w-50">
 
-      <MDBInput wrapperClass='mb-4' label='Email address' id='form1' type='email'/>
-      <MDBInput wrapperClass='mb-4' label='Password' id='form2' type='password'/>
+
+
+      <Button href="http://localhost:8080/api/login-gl" rel="noreferrer" variant="contained" style={{margin: '2rem'}} startIcon={<GoogleIcon />}>
+        LogIn with Google
+      </Button>
 
       <div className="d-flex justify-content-between mx-3 mb-4">
         <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Remember me' />
         <a href="!#">Forgot password?</a>
       </div>
-
-      <MDBBtn href="http://localhost:9090/api/login-gl" rel="noreferrer" className="mb-4">Sign in</MDBBtn>
 
       <div className="text-center">
         <p>Not a member? <a href="#!">Register</a></p>
@@ -35,7 +38,7 @@ function Login() {
             <MDBIcon fab icon='twitter' size="sm"/>
           </MDBBtn>
 
-          <MDBBtn href="http://localhost:9090/api/login-gl" rel="noreferrer" tag='a' color='none' className='m-1' >
+          <MDBBtn href="http://localhost:8080/api/login-gl" rel="noreferrer" tag='a' color='none' className='m-1' >
             <MDBIcon fab icon='google' size="sm" color="success"/>
           </MDBBtn>
 

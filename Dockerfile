@@ -14,7 +14,7 @@ RUN npm config set legacy-peer-deps true && npm i --save --legacy-peer-deps && n
  npm install axios && npm install react-router-dom && npm install -g npm-check-updates && npm install @material-ui/core --legacy-peer-deps && \
  npm install @material-ui/icons --legacy-peer-deps && npm install @mui/material --legacy-peer-deps && npm install @mui/icons-material --legacy-peer-deps && \
  npm install styled-components --legacy-peer-deps && npm install @emotion/react --legacy-peer-deps && npm install @emotion/styled --legacy-peer-deps && \
- npm install mdb-react-ui-kit --legacy-peer-deps && npm install react-cookie --legacy-peer-deps && npm i mdb-react-ui-kit --legacy-peer-deps && \
+ npm install mdb-react-ui-kit --legacy-peer-deps && npm install react-cookie --legacy-peer-deps && npm i @monaco-editor/react --legacy-peer-deps && \
  npm i @fortawesome/fontawesome-free --legacy-peer-deps
 
 # Copy all files from current directory to working dir in image

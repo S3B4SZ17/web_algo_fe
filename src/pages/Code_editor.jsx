@@ -1,17 +1,16 @@
 import React from "react";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-import UserInfo from "../components/UserInfo";
+import Monaco_editor from "../components/Monaco-editor";
 
-
-const User = () => {
+const Code_editor = () => {
   return (
     <div>
       <Navbar />
-      <UserInfo />
+      <Monaco_editor />
       <Footer />
     </div>
   );
 };
 
-export default User;
+export default Code_editor;
