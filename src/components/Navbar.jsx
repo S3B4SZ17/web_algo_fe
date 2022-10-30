@@ -13,6 +13,11 @@ import {
 
 export default function Navbar() {
   const [showNavText, setShowNavText] = useState(false);
+  const isAuthenticated = localStorage.getItem("isAuthenticated");
+  const handleLogout = () => {
+    localStorage.clear();
+    window.location.pathname = "/login";
+  }
 
   return (
     <MDBNavbar expand='lg' dark bgColor='dark'>
@@ -39,12 +44,18 @@ export default function Navbar() {
               <MDBNavbarLink href='/authorized/code_editor'>Code Editor</MDBNavbarLink>
             </MDBNavbarItem>
             <MDBNavbarItem>
-              <MDBNavbarLink href='#'>Pricing</MDBNavbarLink>
+              <MDBNavbarLink href='/authorized/user'>User Info</MDBNavbarLink>
             </MDBNavbarItem>
           </MDBNavbarNav>
           <MDBNavbarNav className='d-flex w-auto mb-3'>
+           { isAuthenticated ?
+            <MDBNavbarLink onClick={handleLogout}>Logout</MDBNavbarLink>
+            : 
+            <>
             <MDBNavbarLink href='/login'>Login</MDBNavbarLink>
             <MDBNavbarLink href='#'>Register</MDBNavbarLink>
+            </>
+            }
           </MDBNavbarNav>
           
         </MDBCollapse>

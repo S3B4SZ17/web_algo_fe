@@ -1,37 +1,50 @@
-import React from "react";
+import React, { useState } from 'react';
 import axios from "axios";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
+import { useCookies } from 'react-cookie';
 
-class Reverse extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      number: 0,
-      reverse: 0,
-    };
-  }
+export default function Reverse (){
+  const [cookies] = useCookies(['token']);
+  const [number, setNumber] = useState(0);
+  const [reverse, setReverse] = useState(0);
 
-  handleChange = (event) => {
-    this.setState({ number: parseInt(event.target.value) });
+  const handleChange = (event) => {
+    setNumber(parseInt(event.target.value));
   };
 
-  handleSubmit = (event) => {
+
+  const instance = axios.create({
+    baseURL: "http://localhost:8080",
+  });
+    /**
+   * Catch the AunAuthorized Request
+   */
+  instance.interceptors.response.use((response) => response, (error) => {
+    if (error.response.status === 401) {
+      localStorage.clear();
+      window.location = '/login';
+    }
+  });
+
+  const handleSubmit = (event) => {
     event.preventDefault();
 
+    setNumber()
     const data = {
-      number: this.state.number,
+      number: number,
     };
-    axios
-      .post("http://localhost:8081/reverse", data)
+    console.log(data);
+    console.log(cookies.token)
+    instance
+      .post("api/authorized/reverse", data, {headers: {'Authorization': `Bearer ${cookies.token}`}})
       .then((res) => {
-        this.setState({ reverse: parseInt(res.data.reverse) });
+        setReverse(parseInt(res.data.reverse));
       })
       .catch((error) => console.error(`Error: ${error}`));
   };
 
-  render() {
     return (
       <div>
         <Card style={{ width: '20rem', margin: '2rem'}}>
@@ -40,16 +53,16 @@ class Reverse extends React.Component {
           <Card.Text>
             Enter a number and it will return the reverse of it.
           </Card.Text>
-          <Form onSubmit={this.handleSubmit}>
+          <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>
                 Number:
-                <Form.Control type="number" name="number" onChange={this.handleChange} />
+                <Form.Control type="number" name="number" onChange={handleChange} />
               </Form.Label>
               <Button style={{ margin: '5px'}} type="submit" variant="primary">Add</Button>
               <Form.Label>
                 Reverse:
-                <Form.Label type="number" name="reverse" style={{ padding: '15px'}}>{this.state.reverse}</Form.Label>
+                <Form.Label type="number" name="reverse" style={{ padding: '15px'}}>{reverse}</Form.Label>
               </Form.Label>
             </Form.Group>
 
@@ -60,7 +73,6 @@ class Reverse extends React.Component {
         
       </div>
     );
-  }
 }
 
-export default Reverse;
+

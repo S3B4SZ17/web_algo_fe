@@ -2,8 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect } from 'react';
 import Card from 'react-bootstrap/Card';
 import { useCookies } from 'react-cookie';
-import Alert from 'react-bootstrap/Alert';
-import Button from 'react-bootstrap/Button';
+import toast, { Toaster } from "react-hot-toast";
 
 
 function UserInfo (){
@@ -12,18 +11,49 @@ function UserInfo (){
     const [authenticated, setAuthenticated] = useState(false);
     const [show, setShow] = useState(true);
 
-    useEffect( () => {
-      if (cookies.token == ''){
-        setAuthenticated(false)
-      }else{
-        axios
-        .get("http://localhost:8080/api/authorized/userinfo", {headers: {'Authorization': `Bearer ${cookies.token}`}})
+    const instance = axios.create({
+      baseURL: "http://localhost:8080",
+    });
+    /**
+    * Catch the AunAuthorized Request
+    */
+    instance.interceptors.response.use((response) => response, (error) => {
+        if (error.response.status === 401) {
+          localStorage.clear();
+          window.location = '/login';
+        }
+      });
+
+    const authenticate = async () => {
+      instance
+        .get("api/authorized/userinfo", {headers: {'Authorization': `Bearer ${cookies.token}`}})
         .then((res) => {
           setEmail(res.data.user.email);
           localStorage.setItem("isAuthenticated", "true");
           setAuthenticated(true)
         })
-        .catch((error) => console.error(`Error: ${error}`));
+        .catch((error) => {
+          setAuthenticated(false)
+          console.error(`Error: ${error}`)
+        });
+    }
+
+    useEffect( () => {
+      if (cookies.token === ''){
+        setAuthenticated(false)
+      }else{
+        
+        toast.promise(authenticate(), {
+            loading: "Processing ...",
+            error: "Ocurrio un error con el servidor",
+            success: "Estas autenticado!!!",
+            icon: '👏',
+            style: {
+                borderRadius: '10px',
+                background: '#333',
+                color: '#fff',
+            },
+        });
       }
       }
       
@@ -31,18 +61,11 @@ function UserInfo (){
 
     return (
       <div>
-          {authenticated
-            ? <Alert show={show} variant="success" onClose={() => setShow(false)} dismissible>Hurray! You're a genius.</Alert>
-
-            : <Alert show={show} variant="danger" onClose={() => setShow(false)} dismissible>
-              <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
-              <p>
-                You are not authenticated!
-              </p>
-              </Alert>
-          }
           {/* {(true|false) ? si true hago esto : si false hago esto} */}
-          
+          <Toaster
+                position="top-center"
+                reverseOrder={false}
+          />
           <Card style={{ width: '20rem', margin: '2rem'}}>
           <Card.Body>
           <Card.Title>User Info</Card.Title>
