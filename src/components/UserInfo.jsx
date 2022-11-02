@@ -7,7 +7,7 @@ import toast, { Toaster } from "react-hot-toast";
 
 function UserInfo (){
     const [cookies] = useCookies(['token']);
-    const [email, setEmail] = useState('');
+    const [email, setEmail] = useState(localStorage.getItem("user_email"));
     const [authenticated, setAuthenticated] = useState(false);
     const [show, setShow] = useState(true);
 
@@ -26,10 +26,9 @@ function UserInfo (){
 
     const authenticate = async () => {
       instance
-        .get("api/authorized/userinfo", {headers: {'Authorization': `Bearer ${cookies.token}`}})
+        .get("api/authorized/userinfo", {headers: {'Authorization': `Bearer ${cookies.token}`, 'user_email': `${email}`}})
         .then((res) => {
-          setEmail(res.data.user.email);
-          localStorage.setItem("isAuthenticated", "true");
+          
           setAuthenticated(true)
         })
         .catch((error) => {
@@ -39,22 +38,17 @@ function UserInfo (){
     }
 
     useEffect( () => {
-      if (cookies.token === ''){
-        setAuthenticated(false)
-      }else{
-        
-        toast.promise(authenticate(), {
-            loading: "Processing ...",
-            error: "Ocurrio un error con el servidor",
-            success: "Estas autenticado!!!",
-            icon: '👏',
-            style: {
-                borderRadius: '10px',
-                background: '#333',
-                color: '#fff',
-            },
-        });
-      }
+      toast.promise(authenticate(), {
+        loading: "Processing ...",
+        error: "Ocurrio un error con el servidor",
+        success: "Estas autenticado!!!",
+        icon: '👏',
+        style: {
+            borderRadius: '10px',
+            background: '#333',
+            color: '#fff',
+        },
+      });
       }
       
     );

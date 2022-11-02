@@ -7,9 +7,10 @@ import axios from "axios";
 import { useCookies } from 'react-cookie';
 import Alert from 'react-bootstrap/Alert';
 
-function DismissibleExample() {
+export default function Welcome() {
   const [showA, setShowA] = useState(true);
   const [show, setShow] = useState(true);
+  const [email, setEmail] = useState('');
 
   const toggleShowA = () => setShowA(!showA);
 
@@ -24,7 +25,8 @@ function DismissibleExample() {
       .get("http://localhost:8080/api/authorized/userinfo", {headers: {'Authorization': `Bearer ${cookies.token}`}})
       .then((res) => {
         localStorage.setItem("isAuthenticated", "true");
-        localStorage.setItem("user", res.data.user.email);
+        setEmail(res.data.user.email)
+        localStorage.setItem("user_email", email);
         setAuthenticated(true)
       })
       .catch((error) => {
@@ -68,5 +70,3 @@ function DismissibleExample() {
     </Row>
   );
 }
-
-export default DismissibleExample;

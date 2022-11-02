@@ -23,6 +23,7 @@ export default function MonacoEditor () {
     //     },
     //   });
 
+    const [email, setEmail] = useState(localStorage.getItem("user_email"));
     const [showA, setShowA] = useState(true);
     const toggleShowA = () => setShowA(!showA);
     const [cookies] = useCookies(['token']);
@@ -54,7 +55,7 @@ export default function MonacoEditor () {
             file: codeContent,
           };
         const res = await instance
-        .post("api/authorized/solve_algo", data, {headers: {'Authorization': `Bearer ${cookies.token}`}})
+        .post("api/authorized/solve_algo", data, {headers: {'Authorization': `Bearer ${cookies.token}`, 'user_email': `${email}`}})
         .then((res) => {
             setIsResolved(res.data.valid);
             setResponse(res.data.message);

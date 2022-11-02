@@ -10,13 +10,40 @@ import {
   MDBNavbarToggler,
   MDBCollapse
 } from 'mdb-react-ui-kit';
+import axios from "axios";
+import { useCookies } from 'react-cookie';
 
 export default function Navbar() {
+  const [cookies] = useCookies(['token']);
   const [showNavText, setShowNavText] = useState(false);
   const isAuthenticated = localStorage.getItem("isAuthenticated");
+  const [email, setEmail] = useState(localStorage.getItem("user_email"));
+
+  const instance = axios.create({
+    baseURL: "http://localhost:8080",
+  });
+  /**
+  * Catch the AunAuthorized Request
+  */
+  // instance.interceptors.response.use((response) => response, (error) => {
+  //     if (error.response.status === 401) {
+  //       localStorage.clear();
+  //       window.location = '/login';
+  //     }
+  //   });
+
   const handleLogout = () => {
-    localStorage.clear();
-    window.location.pathname = "/login";
+    console.log(email + cookies.token);
+    instance
+      .get("api/authorized/end_session", {headers: {'Authorization': `Bearer ${cookies.token}`, 'user_email': `${email}`}})
+      .then((res) => {
+        localStorage.clear();
+        cookies.token = null;
+        window.location.pathname = "/login";
+      })
+      .catch((error) => {
+        console.error(`Error: ${error}`)
+      });
   }
 
   return (

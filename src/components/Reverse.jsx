@@ -9,6 +9,7 @@ export default function Reverse (){
   const [cookies] = useCookies(['token']);
   const [number, setNumber] = useState(0);
   const [reverse, setReverse] = useState(0);
+  const [email, setEmail] = useState(localStorage.getItem("user_email"));
 
   const handleChange = (event) => {
     setNumber(parseInt(event.target.value));
@@ -36,9 +37,9 @@ export default function Reverse (){
       number: number,
     };
     console.log(data);
-    console.log(cookies.token)
+    console.log(cookies.token);
     instance
-      .post("api/authorized/reverse", data, {headers: {'Authorization': `Bearer ${cookies.token}`}})
+      .post("api/authorized/reverse", data, {headers: {'Authorization': `Bearer ${cookies.token}`, 'user_email': `${email}`}})
       .then((res) => {
         setReverse(parseInt(res.data.reverse));
       })
