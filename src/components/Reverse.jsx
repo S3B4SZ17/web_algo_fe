@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
 import { useCookies } from 'react-cookie';
+import toast, { Toaster } from "react-hot-toast";
 
 export default function Reverse (){
   const [cookies] = useCookies(['token']);
@@ -18,16 +19,17 @@ export default function Reverse (){
 
   const instance = axios.create({
     baseURL: "http://localhost:8080",
-  });
-    /**
-   * Catch the AunAuthorized Request
-   */
-  instance.interceptors.response.use((response) => response, (error) => {
-    if (error.response.status === 401) {
-      localStorage.clear();
-      window.location = '/login';
-    }
-  });
+    });
+  /**
+  * Catch the AunAuthorized Request
+  */
+  instance.interceptors.response.use((response) => response, async (error) => {
+      if (error.response.status === 401) {
+        toast.error("Token invalid, please login again");
+        localStorage.clear();
+        window.location = '/login';
+      }
+    });
 
   const handleSubmit = (event) => {
     event.preventDefault();

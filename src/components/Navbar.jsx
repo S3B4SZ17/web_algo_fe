@@ -11,13 +11,15 @@ import {
   MDBCollapse
 } from 'mdb-react-ui-kit';
 import axios from "axios";
+import Image from 'react-bootstrap/Image'
 import { useCookies } from 'react-cookie';
 
 export default function Navbar() {
   const [cookies] = useCookies(['token']);
   const [showNavText, setShowNavText] = useState(false);
-  const isAuthenticated = localStorage.getItem("isAuthenticated");
+  const [isAuthenticated] = useState(localStorage.getItem("isAuthenticated"));
   const [email, setEmail] = useState(localStorage.getItem("user_email"));
+  const [profilePicture, setProfilePicture] = useState(localStorage.getItem("profile_pic"));
 
   const instance = axios.create({
     baseURL: "http://localhost:8080",
@@ -76,11 +78,14 @@ export default function Navbar() {
           </MDBNavbarNav>
           <MDBNavbarNav className='d-flex w-auto mb-3'>
            { isAuthenticated ?
+           <>
             <MDBNavbarLink onClick={handleLogout}>Logout</MDBNavbarLink>
+            <Image width={86} height={86} roundedCircle="true" src={profilePicture}></Image>
+           </>
+            
             : 
             <>
             <MDBNavbarLink href='/login'>Login</MDBNavbarLink>
-            <MDBNavbarLink href='#'>Register</MDBNavbarLink>
             </>
             }
           </MDBNavbarNav>

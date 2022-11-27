@@ -13,12 +13,13 @@ function UserInfo (){
 
     const instance = axios.create({
       baseURL: "http://localhost:8080",
-    });
+      });
     /**
     * Catch the AunAuthorized Request
     */
-    instance.interceptors.response.use((response) => response, (error) => {
+    instance.interceptors.response.use((response) => response, async (error) => {
         if (error.response.status === 401) {
+          toast.error("Token invalid, please login again");
           localStorage.clear();
           window.location = '/login';
         }
@@ -56,10 +57,6 @@ function UserInfo (){
     return (
       <div>
           {/* {(true|false) ? si true hago esto : si false hago esto} */}
-          <Toaster
-                position="top-center"
-                reverseOrder={false}
-          />
           <Card style={{ width: '20rem', margin: '2rem'}}>
           <Card.Body>
           <Card.Title>User Info</Card.Title>

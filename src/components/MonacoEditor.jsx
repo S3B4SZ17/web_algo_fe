@@ -43,12 +43,14 @@ export default function MonacoEditor () {
     /**
     * Catch the AunAuthorized Request
     */
-    instance.interceptors.response.use((response) => response, (error) => {
+    instance.interceptors.response.use((response) => response, async (error) => {
         if (error.response.status === 401) {
+          toast.error("Token invalid, please login again");
           localStorage.clear();
           window.location = '/login';
         }
       });
+      
       const resolveAlgo = async () => {
         setCodeContent(editorRef.current.getValue())
         const data = {
