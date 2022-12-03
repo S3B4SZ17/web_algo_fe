@@ -12,7 +12,9 @@ export default function Intro() {
   };
 
   return (
-    <Carousel activeIndex={index} onSelect={handleSelect}>
+
+    <div style={{width: '100%', top: '5em', position: 'relative'}}> 
+      <Carousel activeIndex={index} onSelect={handleSelect}>
       <Carousel.Item>
         <img style={{ width: "40hv", height: "100hv" }}
           className="d-block w-100 h-40"
@@ -51,5 +53,7 @@ export default function Intro() {
         </Carousel.Caption>
       </Carousel.Item>
     </Carousel>
+    </div>
+    
   );
 }
