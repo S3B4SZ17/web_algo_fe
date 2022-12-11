@@ -7,7 +7,7 @@ const CodeEditor = () => {
   return (
     <div>
       <Navbar />
-      <MonacoEditor />
+      <MonacoEditor name = "reverse_number.py" />
       <Footer />
     </div>
   );

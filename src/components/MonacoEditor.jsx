@@ -1,5 +1,5 @@
 import Editor from "@monaco-editor/react";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Button from 'react-bootstrap/Button';
 import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
@@ -10,7 +10,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { useCookies } from 'react-cookie';
 
-export default function MonacoEditor () {
+export default function MonacoEditor (props) {
 
     // loader.config({
     //     paths: {
@@ -28,13 +28,12 @@ export default function MonacoEditor () {
     const toggleShowA = () => setShowA(!showA);
     const [cookies] = useCookies(['token']);
     var instructions = "# Empieza a resolver el algoritmo\nimport sys\n\nPara pasar argumentos se tiene que usar sys.argv\nnum = int(sys.argv[1])\n";
-    const [contentPython, setContentPython] = useState(instructions)
-    const [codeContent, setCodeContent] = useState('')
-    const [response, setResponse] = useState()
+    const [codeContent, setCodeContent] = useState(instructions)
+    const [response, setResponse] = useState('')
     const [isresolved, setIsResolved] = useState(false)
     const editorRef = useRef(null)
+    
     const handleEditorDidMount = (editor, monaco) => {
-        console.log(editor, monaco)
         editorRef.current = editor
     }
     const instance = axios.create({
@@ -52,9 +51,10 @@ export default function MonacoEditor () {
       });
       
       const resolveAlgo = async () => {
-        setCodeContent(editorRef.current.getValue())
+        // setCodeContent(editorRef.current.getValue()) // another way of getting the content
         const data = {
             file: codeContent,
+            name: props.name
           };
         const res = await instance
         .post("api/authorized/solve_algo", data, {headers: {'Authorization': `Bearer ${cookies.token}`, 'user_email': `${email}`}})
@@ -66,11 +66,11 @@ export default function MonacoEditor () {
         return res
       };
     
-    const handleSubmit =() => {
+    const handleSubmit = async () => {
         toast.promise(resolveAlgo(), {
-            loading: "Processing ...",
+            pending: "Processing ...",
             error: "Ocurrio un error con el servidor",
-            success: response,
+            success: "Code submitted sucessfully",
             icon: '👏',
             style: {
                 borderRadius: '10px',
@@ -78,8 +78,20 @@ export default function MonacoEditor () {
                 color: '#fff',
             },
         });
-        
+
+        toast.success(response);
     }
+
+    useEffect(() => {
+      setResponse(response);
+    })
+
+    
+    function handleEditorChange(value, event) {
+      console.log("here is the current model value:", value);
+      setCodeContent(value)
+    }
+    
     function handleEditorValidation(markers) {
         // model markers
         markers.forEach(marker => console.log("onValidate:", marker.message));
@@ -95,14 +107,13 @@ export default function MonacoEditor () {
             <Reverse/> 
             </Col>
             <Col md={8}>
-                < Button onClick={handleSubmit} variant="primary" style={{margin:'5px'}}>Save</Button>
                 < Button onClick={handleSubmit} variant="primary" style={{margin:'5px'}}>Submit</Button>
                 <Editor
                     height="60vh"
                     defaultLanguage="python"
-                    defaultValue={contentPython}
+                    defaultValue={codeContent}
                     theme="vs-dark"
-                    onChange={(value, event) => setContentPython(value, event)}
+                    onChange={handleEditorChange}
                     onMount={handleEditorDidMount}
                     onValidate={handleEditorValidation}
                 />
