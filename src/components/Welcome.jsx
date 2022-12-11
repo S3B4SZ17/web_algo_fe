@@ -46,7 +46,6 @@ export default function Welcome() {
         localStorage.setItem("user_email", email);
         setAuthenticated(true);
         toast.success('Successfully authenticated!!');
-        
       })
       .catch((error) => {
         setAuthenticated(false);

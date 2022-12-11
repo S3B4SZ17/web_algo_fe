@@ -80,7 +80,7 @@ export default function Navbar() {
            { isAuthenticated ?
            <>
             <MDBNavbarLink onClick={handleLogout}>Logout</MDBNavbarLink>
-            <Image width={86} height={86} roundedCircle="true" src={profilePicture}></Image>
+            <Image width={86} height={86} roundedCircle="true" src={profilePicture} referrerPolicy="no-referrer"></Image>
            </>
             
             : 
