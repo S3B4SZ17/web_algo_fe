@@ -9,6 +9,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { useCookies } from 'react-cookie';
+import Image from 'react-bootstrap/Image';
 
 export default function MonacoEditor (props) {
 
@@ -66,7 +67,7 @@ export default function MonacoEditor (props) {
         return res
       };
     
-    const handleSubmit = async () => {
+    const handleSubmit = () => {
         toast.promise(resolveAlgo(), {
             pending: "Processing ...",
             error: "Ocurrio un error con el servidor",
@@ -86,6 +87,35 @@ export default function MonacoEditor (props) {
       setResponse(response);
     })
 
+    const sendEmail = async () => {
+      const data = {
+        from: email,
+        to: "zsebastian20@hotmail.com",
+        body: "Congratulations!! You solved the " + props.name + " algorithm."
+      };
+      instance
+        .post("api/authorized/sendEmail", data, {headers: {'Authorization': `Bearer ${cookies.token}`}})
+        .then((res) => {
+          console.log(res)
+        })
+        .catch((error) => {
+          console.error(`Error: ${error}`)
+        });
+    }
+
+    const handleSendEmail = () => {
+      toast.promise(sendEmail(), {
+          pending: "Processing ...",
+          error: "Ocurrio un error con el servidor",
+          success: "Email sent!!",
+          icon: '👏',
+          style: {
+              borderRadius: '10px',
+              background: '#333',
+              color: '#fff',
+          },
+      });
+  }
     
     function handleEditorChange(value, event) {
       console.log("here is the current model value:", value);
@@ -108,6 +138,16 @@ export default function MonacoEditor (props) {
             </Col>
             <Col md={8}>
                 < Button onClick={handleSubmit} variant="primary" style={{margin:'5px'}}>Submit</Button>
+                { isresolved ?
+                  <>
+                    <Image width={86} height={86} src="https://media2.giphy.com/media/P3gCL7t3cbOWUN8ma7/giphy.gif" referrerPolicy="no-referrer"/>
+                    <Button onClick={handleSendEmail} variant="primary" style={{margin:'5px'}}>Send Email</Button>
+                  </>
+                  : 
+                  <>
+                  </>
+                }
+                
                 <Editor
                     height="60vh"
                     defaultLanguage="python"
