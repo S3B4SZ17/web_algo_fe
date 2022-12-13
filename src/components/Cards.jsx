@@ -32,7 +32,7 @@ export default function App() {
             </div>
 
             </MDBCardText>
-            <MDBBtn href='#'>Learn More</MDBBtn>
+            <MDBBtn href='/authorized/reverseNum'>Learn More</MDBBtn>
             </MDBCardBody>
             </MDBCard>
         </div> 
@@ -49,7 +49,7 @@ export default function App() {
             <div  style={{height: '1.5em'}}>   
 
             </div>
-            <MDBBtn href='#'>Learn More</MDBBtn>
+            <MDBBtn href='/authorized/addTwo'>Learn More</MDBBtn>
             </MDBCardBody>
             </MDBCard> 
         </div>   
@@ -63,7 +63,7 @@ export default function App() {
             The recursive approach to reverse a linked list is simple, just we have to divide the linked lists in two parts and i.e first node and the rest of the linked list, 
             and then call the recursion for the other part by maintaining the connectionthe order of the items
             </MDBCardText>
-            <MDBBtn href='#'>Learn More</MDBBtn>
+            <MDBBtn href='/authorized/reverseLinkedList'>Learn More</MDBBtn>
             </MDBCardBody>
             </MDBCard> 
         </div>   

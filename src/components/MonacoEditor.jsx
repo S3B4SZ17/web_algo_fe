@@ -1,7 +1,7 @@
 import Editor from "@monaco-editor/react";
 import { useState, useRef, useEffect } from "react";
 import Button from 'react-bootstrap/Button';
-import toast from "react-hot-toast";
+import toast, {Toaster} from "react-hot-toast";
 import axios from "axios";
 import { useCookies } from 'react-cookie';
 import Image from 'react-bootstrap/Image';
@@ -85,7 +85,7 @@ export default function MonacoEditor (props) {
     const sendEmail = async () => {
       const data = {
         from: email,
-        to: "zsebastian20@hotmail.com",
+        to: email,
         body: "Congratulations!! You solved the " + props.name + " algorithm."
       };
       instance
@@ -123,6 +123,10 @@ export default function MonacoEditor (props) {
       }
   return (
     <>
+      <Toaster
+        position="top-center"
+        reverseOrder={false}
+      />
       < Button onClick={handleSubmit} variant="primary" style={{margin:'5px'}}>Submit</Button>
       { isresolved ?
         <>

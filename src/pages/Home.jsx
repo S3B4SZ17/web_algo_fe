@@ -10,7 +10,7 @@ const Home = () => {
       <Navbar />
 
       <div style={{padding: '2em'}}> 
-        <h1>Welcome to Code Lap</h1>
+        <h1>Welcome to Code Lab</h1>
         <h4>It's Time To Learn</h4>
       </div>
       <Card />

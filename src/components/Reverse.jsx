@@ -8,8 +8,8 @@ import toast, { Toaster } from "react-hot-toast";
 
 export default function Reverse (){
   const [cookies] = useCookies(['token']);
-  const [number, setNumber] = useState(0);
-  const [reverse, setReverse] = useState(0);
+  const [number, setNumber] = useState(1);
+  const [reverse, setReverse] = useState(1);
   const [email, setEmail] = useState(localStorage.getItem("user_email"));
 
   const handleChange = (event) => {
@@ -39,7 +39,6 @@ export default function Reverse (){
       number: number,
     };
     console.log(data);
-    console.log(cookies.token);
     instance
       .post("api/authorized/reverse", data, {headers: {'Authorization': `Bearer ${cookies.token}`, 'user_email': `${email}`}})
       .then((res) => {
@@ -60,9 +59,9 @@ export default function Reverse (){
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>
                 Number:
-                <Form.Control type="number" name="number" onChange={handleChange} />
+                <Form.Control type="number" name="number" onChange={handleChange} required/>
               </Form.Label>
-              <Button style={{ margin: '5px'}} type="submit" variant="primary">Add</Button>
+              <Button style={{ margin: '5px'}} type="submit" variant="primary">Reverse</Button>
               <Form.Label>
                 Reverse:
                 <Form.Label type="number" name="reverse" style={{ padding: '15px'}}>{reverse}</Form.Label>

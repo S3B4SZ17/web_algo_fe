@@ -9,12 +9,26 @@ import toast, { Toaster } from "react-hot-toast";
 export default function Reverse (){
 
   const [cookies] = useCookies(['token']);
-  const [number, setNumber] = useState(0);
-  const [reverse, setReverse] = useState(0);
+  const [number1, setNumber1] = useState(1);
+  const [number1arr, setNumber1arr] = useState([1]);
+  const [number2, setNumber2] = useState(1);
+  const [number2arr, setNumber2arr] = useState([1]);
+  const [sum_res, setSum] = useState('');
   const [email, setEmail] = useState(localStorage.getItem("user_email"));
 
-  const handleChange = (event) => {
-    setNumber(parseInt(event.target.value));
+  const handleChangeNum1 = (event) => {
+    setNumber1(parseInt(event.target.value));
+    
+    const numsArr1 = Array.from(String(number1), Number);
+    setNumber1arr(numsArr1)
+    console.log(numsArr1)
+  };
+
+  const handleChangeNum2 = (event) => {
+    setNumber2(parseInt(event.target.value));
+    const numsArr2 = Array.from(String(number2), Number);
+    setNumber2arr(numsArr2)
+    console.log(numsArr2)
   };
 
 
@@ -35,16 +49,16 @@ export default function Reverse (){
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    setNumber()
     const data = {
-      number: number,
+      listVal1: number1arr,
+      listVal2: number2arr
     };
     console.log(data);
-    console.log(cookies.token);
     instance
-      .post("api/authorized/reverse", data, {headers: {'Authorization': `Bearer ${cookies.token}`, 'user_email': `${email}`}})
+      .post("api/authorized/two_sums", data, {headers: {'Authorization': `Bearer ${cookies.token}`, 'user_email': `${email}`}})
       .then((res) => {
-        setReverse(parseInt(res.data.reverse));
+        console.log(res.data.sum);
+        setSum(res.data.sum);
       })
       .catch((error) => console.error(`Error: ${error}`));
   };
@@ -63,15 +77,15 @@ export default function Reverse (){
 
               <Form.Label>
                 Number 1:
-                <Form.Control type="number" name="number" onChange={handleChange} />
+                <Form.Control type="number" name="number1" onChange={handleChangeNum1} required/>
                 Number 2:
-                <Form.Control type="number" name="number" onChange={handleChange} />
+                <Form.Control type="number" name="number2" onChange={handleChangeNum2} required/>
               </Form.Label>
 
               <Button style={{ margin: '5px'}} type="submit" variant="primary">Add</Button>
               <Form.Label>
                 Result:
-                <Form.Label type="number" name="reverse" style={{ padding: '15px'}}>{reverse}</Form.Label>
+                <Form.Label type="text" name="sum_res" style={{ padding: '15px'}}>[{sum_res}]</Form.Label>
                 
               </Form.Label>
             </Form.Group>

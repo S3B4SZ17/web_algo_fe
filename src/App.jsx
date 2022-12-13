@@ -23,8 +23,8 @@ function App() {
     <Route path="/authorized/user" element={<ProtectedRoute />}>
       <Route path="/authorized/user" element={<UserInfo />}/>
     </Route>
-    <Route path="/authorized/code_editor" element={<ProtectedRoute />}>
-      <Route path="/authorized/code_editor" element={<ReverseNumber />} />
+    <Route path="/authorized/reverseNum" element={<ProtectedRoute />}>
+      <Route path="/authorized/reverseNum" element={<ReverseNumber />} />
     </Route>
     <Route path="/authorized/addTwo" element={<ProtectedRoute />}>
       <Route path="/authorized/addTwo" element={<AddTwo />} />

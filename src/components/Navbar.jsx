@@ -76,7 +76,7 @@ export default function Navbar() {
               <MDBDropdown group className='shadow-0'>
               <MDBDropdownToggle color='light'>Code Editor</MDBDropdownToggle>
               <MDBDropdownMenu>
-              <MDBDropdownItem link href='/authorized/code_editor'>Reverse Number</MDBDropdownItem>
+              <MDBDropdownItem link href='/authorized/reverseNum'>Reverse Number</MDBDropdownItem>
               <MDBDropdownItem link href='/authorized/addTwo'>Add Two Numbers</MDBDropdownItem>
               <MDBDropdownItem link href='/authorized/reverseLinkedList'>Reverse Linked List</MDBDropdownItem>
               </MDBDropdownMenu>

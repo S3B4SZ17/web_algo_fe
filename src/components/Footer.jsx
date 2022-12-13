@@ -36,7 +36,7 @@ export default function Footer() {
           <MDBRow className='mt-3'>
             <MDBCol md="3" lg="4" xl="3" className='mx-auto mb-4'>
               <h6 className='text-uppercase fw-bold mb-4'>
-                <MDBIcon className="me-3"> <i class="fas fa-code"></i>
+                <MDBIcon className="me-3"> <i className="fas fa-code"></i>
               </MDBIcon>
                 CODELAB
               </h6>
@@ -62,7 +62,7 @@ export default function Footer() {
             <MDBCol md="3" lg="2" xl="2" className='mx-auto mb-4'>
               <h6 className='text-uppercase fw-bold mb-4'>Useful links</h6>
               <p>
-                <a link href='https://www.geeksforgeeks.org/fundamentals-of-algorithms/' className='text-reset'>
+                <a href='https://www.geeksforgeeks.org/fundamentals-of-algorithms/' className='text-reset'>
                   Geeks for geeks
                 </a>
               </p>

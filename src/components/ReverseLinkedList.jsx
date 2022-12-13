@@ -9,12 +9,17 @@ import toast, { Toaster } from "react-hot-toast";
 export default function Reverse (){
 
   const [cookies] = useCookies(['token']);
-  const [number, setNumber] = useState(0);
-  const [reverse, setReverse] = useState(0);
+  const [linkedList, setLinkedList] = useState(1);
+  const [linkListarr, setLinkedListarr] = useState([1]);
+  const [revlinkedList, setReverseList] = useState(1);
   const [email, setEmail] = useState(localStorage.getItem("user_email"));
 
-  const handleChange = (event) => {
-    setNumber(parseInt(event.target.value));
+  const handleChangeList = (event) => {
+    setLinkedList(parseInt(event.target.value));
+
+    const numsArr1 = Array.from(String(linkedList), Number);
+    setLinkedListarr(numsArr1)
+    console.log(numsArr1)
   };
 
 
@@ -35,16 +40,14 @@ export default function Reverse (){
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    setNumber()
     const data = {
-      number: number,
+      linkedList: linkListarr
     };
     console.log(data);
-    console.log(cookies.token);
     instance
-      .post("api/authorized/reverse", data, {headers: {'Authorization': `Bearer ${cookies.token}`, 'user_email': `${email}`}})
+      .post("api/authorized/reverse_linkedList", data, {headers: {'Authorization': `Bearer ${cookies.token}`, 'user_email': `${email}`}})
       .then((res) => {
-        setReverse(parseInt(res.data.reverse));
+        setReverseList(res.data.linkedList);
       })
       .catch((error) => console.error(`Error: ${error}`));
   };
@@ -62,13 +65,13 @@ export default function Reverse (){
 
               <Form.Label>
                 Numbers :
-                <Form.Control type="number" name="number" onChange={handleChange} />
+                <Form.Control type="number" name="linkelist" onChange={handleChangeList} required/>
               </Form.Label>
 
-              <Button style={{ margin: '5px'}} type="submit" variant="primary">Add</Button>
+              <Button style={{ margin: '5px'}} type="submit" variant="primary">Reverse</Button>
               <Form.Label>
                 Result:
-                <Form.Label type="number" name="reverse" style={{ padding: '15px'}}>{reverse}</Form.Label>
+                <Form.Label type="text" name="revList" style={{ padding: '15px'}}>[{revlinkedList}]</Form.Label>
                 
               </Form.Label>
             </Form.Group>
