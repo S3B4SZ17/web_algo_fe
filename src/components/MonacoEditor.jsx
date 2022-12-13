@@ -1,13 +1,8 @@
 import Editor from "@monaco-editor/react";
 import { useState, useRef, useEffect } from "react";
 import Button from 'react-bootstrap/Button';
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import axios from "axios";
-import { loader } from "@monaco-editor/react";
-import Reverse from "./Reverse";
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import { useCookies } from 'react-cookie';
 import Image from 'react-bootstrap/Image';
 
@@ -127,39 +122,27 @@ export default function MonacoEditor (props) {
         markers.forEach(marker => console.log("onValidate:", marker.message));
       }
   return (
-    <Container>
-        <Row>
-            <Col md={4}> 
-            <Toaster
-                position="top-center"
-                reverseOrder={false}
-            />
-            <Reverse/> 
-            </Col>
-            <Col md={8}>
-                < Button onClick={handleSubmit} variant="primary" style={{margin:'5px'}}>Submit</Button>
-                { isresolved ?
-                  <>
-                    <Image width={86} height={86} src="https://media2.giphy.com/media/P3gCL7t3cbOWUN8ma7/giphy.gif" referrerPolicy="no-referrer"/>
-                    <Button onClick={handleSendEmail} variant="primary" style={{margin:'5px'}}>Send Email</Button>
-                  </>
-                  : 
-                  <>
-                  </>
-                }
-                
-                <Editor
-                    height="60vh"
-                    defaultLanguage="python"
-                    defaultValue={codeContent}
-                    theme="vs-dark"
-                    onChange={handleEditorChange}
-                    onMount={handleEditorDidMount}
-                    onValidate={handleEditorValidation}
-                />
-            </Col>
-        </Row>
-        
-    </Container>
+    <>
+      < Button onClick={handleSubmit} variant="primary" style={{margin:'5px'}}>Submit</Button>
+      { isresolved ?
+        <>
+          <Image width={86} height={86} src="https://media2.giphy.com/media/P3gCL7t3cbOWUN8ma7/giphy.gif" referrerPolicy="no-referrer"/>
+          <Button onClick={handleSendEmail} variant="primary" style={{margin:'5px'}}>Send Email</Button>
+        </>
+        : 
+        <>
+        </>
+      }
+      
+      <Editor
+          height="60vh"
+          defaultLanguage="python"
+          defaultValue={codeContent}
+          theme="vs-dark"
+          onChange={handleEditorChange}
+          onMount={handleEditorDidMount}
+          onValidate={handleEditorValidation}
+      />
+    </>
   );
 }

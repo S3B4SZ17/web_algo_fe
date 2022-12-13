@@ -1,23 +1,23 @@
 import React from "react";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-import AddEditor from "../components/MonacoEditor";
-import AddTwo from "../components/AddTwo";
+import ReverseNum from "../components/MonacoEditor";
+import Reverse from "../components/Reverse";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-const AddTwoCode = () => {
+const ReverseNumber = () => {
   return (
     <div>
       <Navbar />
         <Container>
           <Row>
               <Col md={4}> 
-                <AddTwo/> 
+                <Reverse/> 
               </Col>
               <Col md={8}>
-                <AddEditor name = "add_two.py" />
+                <ReverseNum name = "reverse_number.py" />
               </Col>
           </Row>
           
@@ -28,4 +28,4 @@ const AddTwoCode = () => {
   );
 };
 
-export default AddTwoCode;
+export default ReverseNumber;

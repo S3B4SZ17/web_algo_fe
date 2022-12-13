@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import { useCookies } from 'react-cookie';
 import Toast from 'react-bootstrap/Toast';
+import Image from 'react-bootstrap/Image';
 
 export default function Welcome() {
   const [showA, setShowA] = useState(true);
@@ -63,7 +64,9 @@ export default function Welcome() {
         
       </Col>
       <Col md={6} className="mb-2">
-        <h3>Welcome back son</h3>
+        <h3>Welcome back!</h3>
+        <Image src="https://media.giphy.com/media/l0MYGb1LuZ3n7dRnO/giphy.gif"/>
+        
       </Col>
     </Row>
   );

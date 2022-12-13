@@ -1,23 +1,23 @@
 import React from "react";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-import AddEditor from "../components/MonacoEditor";
-import AddTwo from "../components/AddTwo";
+import ReverseEditor from "../components/MonacoEditor";
+import ReverseLinkedList from "../components/ReverseLinkedList";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-const AddTwoCode = () => {
+const ReverseList = () => {
   return (
     <div>
       <Navbar />
         <Container>
           <Row>
               <Col md={4}> 
-                <AddTwo/> 
+                <ReverseLinkedList/> 
               </Col>
               <Col md={8}>
-                <AddEditor name = "add_two.py" />
+                <ReverseEditor name = "reverse_linkedlist.py" />
               </Col>
           </Row>
           
@@ -28,4 +28,4 @@ const AddTwoCode = () => {
   );
 };
 
-export default AddTwoCode;
+export default ReverseList;

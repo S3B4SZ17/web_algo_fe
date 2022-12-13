@@ -27,15 +27,15 @@ export default function Navbar() {
   const instance = axios.create({
     baseURL: "http://localhost:8080",
   });
-  /**
-  * Catch the AunAuthorized Request
-  */
-  // instance.interceptors.response.use((response) => response, (error) => {
-  //     if (error.response.status === 401) {
-  //       localStorage.clear();
-  //       window.location = '/login';
-  //     }
-  //   });
+
+  // Catch the AunAuthorized Request
+  
+  instance.interceptors.response.use((response) => response, (error) => {
+      if (error.response.status === 401) {
+        localStorage.clear();
+        window.location = '/login';
+      }
+    });
 
   const handleLogout = () => {
     console.log(email + cookies.token);
@@ -78,7 +78,7 @@ export default function Navbar() {
               <MDBDropdownMenu>
               <MDBDropdownItem link href='/authorized/code_editor'>Reverse Number</MDBDropdownItem>
               <MDBDropdownItem link href='/authorized/addTwo'>Add Two Numbers</MDBDropdownItem>
-              <MDBDropdownItem link>Reverse Linked List</MDBDropdownItem>
+              <MDBDropdownItem link href='/authorized/reverseLinkedList'>Reverse Linked List</MDBDropdownItem>
               </MDBDropdownMenu>
 
             <MDBNavbarItem>
@@ -100,7 +100,6 @@ export default function Navbar() {
             <MDBNavbarLink onClick={handleLogout}>Logout</MDBNavbarLink>
             <Image width={86} height={86} roundedCircle="true" src={profilePicture} referrerPolicy="no-referrer"></Image>
            </>
-            
             : 
             <>
             <MDBNavbarLink href='/login'>Login</MDBNavbarLink>
