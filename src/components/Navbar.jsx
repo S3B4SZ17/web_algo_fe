@@ -14,6 +14,9 @@ import axios from "axios";
 import Image from 'react-bootstrap/Image'
 import { useCookies } from 'react-cookie';
 
+import { MDBDropdown, MDBDropdownMenu, MDBDropdownToggle, MDBDropdownItem } from 'mdb-react-ui-kit';
+
+
 export default function Navbar() {
   const [cookies] = useCookies(['token']);
   const [showNavText, setShowNavText] = useState(false);
@@ -69,12 +72,27 @@ export default function Navbar() {
                 Home
               </MDBNavbarLink>
             </MDBNavbarItem>
-            <MDBNavbarItem>
-              <MDBNavbarLink href='/authorized/code_editor'>Code Editor</MDBNavbarLink>
-            </MDBNavbarItem>
+
+              <MDBDropdown group className='shadow-0'>
+              <MDBDropdownToggle color='light'>Code Editor</MDBDropdownToggle>
+              <MDBDropdownMenu>
+              <MDBDropdownItem link href='/authorized/code_editor'>Reverse Number</MDBDropdownItem>
+              <MDBDropdownItem link href='/authorized/addTwo'>Add Two Numbers</MDBDropdownItem>
+              <MDBDropdownItem link>Reverse Linked List</MDBDropdownItem>
+              </MDBDropdownMenu>
+
             <MDBNavbarItem>
               <MDBNavbarLink href='/authorized/user'>User Info</MDBNavbarLink>
             </MDBNavbarItem>
+            
+            <MDBNavbarItem>
+              <MDBNavbarLink href='/authorized/faqs'>Help</MDBNavbarLink>
+            </MDBNavbarItem>
+            
+              
+
+            
+      </MDBDropdown>
           </MDBNavbarNav>
           <MDBNavbarNav className='d-flex w-auto mb-3'>
            { isAuthenticated ?

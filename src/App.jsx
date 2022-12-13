@@ -5,6 +5,10 @@ import LoginPage from "./pages/LoginPage";
 import UserInfo from "./pages/User";
 import CodeEditor from "./pages/CodeEditor";
 import ProtectedRoute from "./components/ProtectedRoute";
+import AddTwo from "./pages/AddTwoCode";
+import ReverseLinked from "./pages/ReverseLinkedCode";
+import Faqs from "./pages/Faqs";
+
 import "./App.css";
 import WelcomeUser from "./pages/WelcomeUser";
 
@@ -20,6 +24,18 @@ function App() {
     <Route path="/authorized/code_editor" element={<ProtectedRoute />}>
       <Route path="/authorized/code_editor" element={<CodeEditor />} />
     </Route>
+    <Route path="/authorized/" element={<ProtectedRoute />}>
+      <Route path="/authorized/addTwo" element={<AddTwo />} />
+    </Route>
+
+    <Route path="/authorized/" element={<ProtectedRoute />}>
+      <Route path="/authorized/reverseLinkedList" element={<ReverseLinked />} />
+    </Route>
+
+    <Route path="/authorized/" element={<ProtectedRoute />}>
+      <Route path="/authorized/faqs" element={<Faqs />} />
+    </Route>
+    
   </Routes>
   );
 }
