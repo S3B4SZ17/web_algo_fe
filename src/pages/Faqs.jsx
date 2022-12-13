@@ -1,16 +1,16 @@
 import React from "react";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-import MonacoEditor from "../components/MonacoEditor";
+import FaqsC from "../components/FaqsC";
 
-const CodeEditor = () => {
+const Faqs = () => {
   return (
     <div>
       <Navbar />
-      <MonacoEditor name = "reverse_number.py" />
+      <FaqsC />
       <Footer />
     </div>
   );
 };
 
-export default CodeEditor;
+export default Faqs;

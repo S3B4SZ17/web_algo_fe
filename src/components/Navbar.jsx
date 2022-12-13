@@ -14,6 +14,9 @@ import axios from "axios";
 import Image from 'react-bootstrap/Image'
 import { useCookies } from 'react-cookie';
 
+import { MDBDropdown, MDBDropdownMenu, MDBDropdownToggle, MDBDropdownItem } from 'mdb-react-ui-kit';
+
+
 export default function Navbar() {
   const [cookies] = useCookies(['token']);
   const [showNavText, setShowNavText] = useState(false);
@@ -24,15 +27,15 @@ export default function Navbar() {
   const instance = axios.create({
     baseURL: "http://localhost:8080",
   });
-  /**
-  * Catch the AunAuthorized Request
-  */
-  // instance.interceptors.response.use((response) => response, (error) => {
-  //     if (error.response.status === 401) {
-  //       localStorage.clear();
-  //       window.location = '/login';
-  //     }
-  //   });
+
+  // Catch the AunAuthorized Request
+  
+  instance.interceptors.response.use((response) => response, (error) => {
+      if (error.response.status === 401) {
+        localStorage.clear();
+        window.location = '/login';
+      }
+    });
 
   const handleLogout = () => {
     console.log(email + cookies.token);
@@ -69,12 +72,27 @@ export default function Navbar() {
                 Home
               </MDBNavbarLink>
             </MDBNavbarItem>
-            <MDBNavbarItem>
-              <MDBNavbarLink href='/authorized/code_editor'>Code Editor</MDBNavbarLink>
-            </MDBNavbarItem>
+
+              <MDBDropdown group className='shadow-0'>
+              <MDBDropdownToggle color='light'>Code Editor</MDBDropdownToggle>
+              <MDBDropdownMenu>
+              <MDBDropdownItem link href='/authorized/reverseNum'>Reverse Number</MDBDropdownItem>
+              <MDBDropdownItem link href='/authorized/addTwo'>Add Two Numbers</MDBDropdownItem>
+              <MDBDropdownItem link href='/authorized/reverseLinkedList'>Reverse Linked List</MDBDropdownItem>
+              </MDBDropdownMenu>
+
             <MDBNavbarItem>
               <MDBNavbarLink href='/authorized/user'>User Info</MDBNavbarLink>
             </MDBNavbarItem>
+            
+            <MDBNavbarItem>
+              <MDBNavbarLink href='/authorized/faqs'>Help</MDBNavbarLink>
+            </MDBNavbarItem>
+            
+              
+
+            
+      </MDBDropdown>
           </MDBNavbarNav>
           <MDBNavbarNav className='d-flex w-auto mb-3'>
            { isAuthenticated ?
@@ -82,7 +100,6 @@ export default function Navbar() {
             <MDBNavbarLink onClick={handleLogout}>Logout</MDBNavbarLink>
             <Image width={86} height={86} roundedCircle="true" src={profilePicture} referrerPolicy="no-referrer"></Image>
            </>
-            
             : 
             <>
             <MDBNavbarLink href='/login'>Login</MDBNavbarLink>
