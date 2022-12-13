@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import toast from "react-hot-toast";
 import axios from "axios";
 import { useCookies } from 'react-cookie';
-import Toast from 'react-bootstrap/Toast';
+import toast, {Toaster} from "react-hot-toast";
 import Image from 'react-bootstrap/Image';
 
 export default function Welcome() {
@@ -61,6 +59,10 @@ export default function Welcome() {
   return (
     <Row>
       <Col md={6} className="mb-2">
+        <Toaster
+          position="top-center"
+          reverseOrder={false}
+        />
         
       </Col>
       <Col md={6} className="mb-2">

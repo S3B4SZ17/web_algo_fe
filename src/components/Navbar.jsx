@@ -54,7 +54,7 @@ export default function Navbar() {
   return (
     <MDBNavbar expand='lg' dark bgColor='dark'>
       <MDBContainer fluid>
-        <MDBNavbarBrand href='#'>Web Algo</MDBNavbarBrand>
+        <MDBNavbarBrand href='/'>Web Algo</MDBNavbarBrand>
         <MDBNavbarToggler
           type='button'
           data-target='#navbarText'
@@ -74,12 +74,13 @@ export default function Navbar() {
             </MDBNavbarItem>
 
               <MDBDropdown group className='shadow-0'>
-              <MDBDropdownToggle color='light'>Code Editor</MDBDropdownToggle>
-              <MDBDropdownMenu>
-              <MDBDropdownItem link href='/authorized/reverseNum'>Reverse Number</MDBDropdownItem>
-              <MDBDropdownItem link href='/authorized/addTwo'>Add Two Numbers</MDBDropdownItem>
-              <MDBDropdownItem link href='/authorized/reverseLinkedList'>Reverse Linked List</MDBDropdownItem>
-              </MDBDropdownMenu>
+                <MDBDropdownToggle color='light'>Code Editor</MDBDropdownToggle>
+                <MDBDropdownMenu>
+                <MDBDropdownItem link href='/authorized/reverseNum'>Reverse Number</MDBDropdownItem>
+                <MDBDropdownItem link href='/authorized/addTwo'>Add Two Numbers</MDBDropdownItem>
+                <MDBDropdownItem link href='/authorized/reverseLinkedList'>Reverse Linked List</MDBDropdownItem>
+                </MDBDropdownMenu>
+              </MDBDropdown>
 
             <MDBNavbarItem>
               <MDBNavbarLink href='/authorized/user'>User Info</MDBNavbarLink>
@@ -88,11 +89,7 @@ export default function Navbar() {
             <MDBNavbarItem>
               <MDBNavbarLink href='/authorized/faqs'>Help</MDBNavbarLink>
             </MDBNavbarItem>
-            
-              
-
-            
-      </MDBDropdown>
+      
           </MDBNavbarNav>
           <MDBNavbarNav className='d-flex w-auto mb-3'>
            { isAuthenticated ?

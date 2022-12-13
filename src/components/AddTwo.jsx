@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -9,24 +9,21 @@ import toast, { Toaster } from "react-hot-toast";
 export default function Reverse (){
 
   const [cookies] = useCookies(['token']);
-  const [number1, setNumber1] = useState(1);
   const [number1arr, setNumber1arr] = useState([1]);
-  const [number2, setNumber2] = useState(1);
   const [number2arr, setNumber2arr] = useState([1]);
   const [sum_res, setSum] = useState('');
   const [email, setEmail] = useState(localStorage.getItem("user_email"));
 
   const handleChangeNum1 = (event) => {
-    setNumber1(parseInt(event.target.value));
     
-    const numsArr1 = Array.from(String(number1), Number);
+    const numsArr1 = Array.from(String(parseInt(event.target.value)), Number);
     setNumber1arr(numsArr1)
     console.log(numsArr1)
   };
 
   const handleChangeNum2 = (event) => {
-    setNumber2(parseInt(event.target.value));
-    const numsArr2 = Array.from(String(number2), Number);
+
+    const numsArr2 = Array.from(String(parseInt(event.target.value)), Number);
     setNumber2arr(numsArr2)
     console.log(numsArr2)
   };

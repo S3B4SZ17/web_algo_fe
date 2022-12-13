@@ -9,15 +9,13 @@ import toast, { Toaster } from "react-hot-toast";
 export default function Reverse (){
 
   const [cookies] = useCookies(['token']);
-  const [linkedList, setLinkedList] = useState(1);
   const [linkListarr, setLinkedListarr] = useState([1]);
   const [revlinkedList, setReverseList] = useState(1);
   const [email, setEmail] = useState(localStorage.getItem("user_email"));
 
   const handleChangeList = (event) => {
-    setLinkedList(parseInt(event.target.value));
 
-    const numsArr1 = Array.from(String(linkedList), Number);
+    const numsArr1 = Array.from(String(parseInt(event.target.value)), Number);
     setLinkedListarr(numsArr1)
     console.log(numsArr1)
   };

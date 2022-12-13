@@ -49,14 +49,16 @@ function UserInfo (){
             background: '#333',
             color: '#fff',
         },
-      });
-      }
+      })}
       
     );
 
     return (
       <div>
-          {/* {(true|false) ? si true hago esto : si false hago esto} */}
+          <Toaster
+            position="top-center"
+            reverseOrder={false}
+          />
           <Card style={{ width: '20rem', margin: '2rem'}}>
           <Card.Body>
           <Card.Title>User Info</Card.Title>
